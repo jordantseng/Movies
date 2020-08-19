@@ -3,7 +3,6 @@ import moviesService from '../../Services/moviesService';
 import { genres } from '../../Services/utilService';
 import Youtube from 'react-youtube';
 import { Container, Row, Col, Image, ListGroup, Badge } from 'react-bootstrap';
-import Loader from '../../Components/Loader/Loader';
 
 const MovieDetail = props => {
   const [movie, setMovie] = useState(null);
@@ -11,19 +10,19 @@ const MovieDetail = props => {
   useEffect(() => {
     const movieId = +props.match.params.id;
 
-    moviesService.getMovieById(movieId).then(res => {
-      setMovie(res);
+    moviesService.getMovieById(movieId).then(movie => {
+      setMovie(movie);
     });
   }, [props.match.params.id]);
-
-  if (!movie) {
-    return <Loader />;
-  }
 
   const selectBadgeColor = genreId => {
     const genre = genres.find(genre => genre.id === genreId);
     return genre.color;
   };
+
+  if (!movie) {
+    return null;
+  }
 
   const renderGeneres = (
     <h6 className="m-0">

@@ -3,14 +3,10 @@ import { Container } from 'react-bootstrap';
 import MovieList from '../../Components/MovieList/MovieList';
 import ReactPaginate from 'react-paginate';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
-import Loader from '../../Components/Loader/Loader';
 
 const NowPlaying = () => {
   const [movies, pageCount, setCurrentPage] = useFetchMovies('now_playing');
 
-  if (movies.length < 1) {
-    return <Loader />;
-  }
   return (
     <Container>
       <MovieList pageTitle="Now Playing" movies={movies} />

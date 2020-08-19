@@ -1,5 +1,6 @@
 import moviesService from '../Services/moviesService';
 import history from '../history';
+import { SEARCH_MOVIES, FETCH_MOVIES, FETCH_PAGE } from './types';
 
 export const searchMovies = (searchTerm, currentPage) => async (
   dispatch,
@@ -12,9 +13,9 @@ export const searchMovies = (searchTerm, currentPage) => async (
     total_pages,
   } = await moviesService.getSearch(searchTerm, currentPage);
 
-  dispatch({ type: 'SEARCH_MOVIES', payload: results });
+  dispatch({ type: SEARCH_MOVIES, payload: results });
   dispatch({
-    type: 'FETCH_PAGE',
+    type: FETCH_PAGE,
     payload: { page, total_results, total_pages },
   });
   history.push(`/search/${searchTerm}`);
@@ -31,9 +32,9 @@ export const fetchMovies = (pageTitle, currentPage) => async (
     total_pages,
   } = await moviesService.getMovies(pageTitle, currentPage);
 
-  dispatch({ type: 'FETCH_MOVIES', payload: results });
+  dispatch({ type: FETCH_MOVIES, payload: results });
   dispatch({
-    type: 'FETCH_PAGE',
+    type: FETCH_PAGE,
     payload: { page, total_results, total_pages },
   });
 };

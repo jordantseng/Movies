@@ -13,7 +13,8 @@ const Home = () => {
   };
 
   return (
-    <Container style={{ marginTop: '25%' }}>
+    <Container style={{ marginTop: '20%' }}>
+      <h3>Search Movies</h3>
       <Form onSubmit={e => onSubmit(e)}>
         <Row>
           <Col xs={10}>

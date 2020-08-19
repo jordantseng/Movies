@@ -3,13 +3,10 @@ import { Container } from 'react-bootstrap';
 import MovieList from '../../Components/MovieList/MovieList';
 import ReactPaginate from 'react-paginate';
 import { useFetchMovies } from '../../hooks/useFetchMovies';
-import Loader from '../../Components/Loader/Loader';
+
 const TopRated = () => {
   const [movies, pageCount, setCurrentPage] = useFetchMovies('top_rated');
-  
-  if (movies.length < 1) {
-    return <Loader />;
-  }
+
   return (
     <Container>
       <MovieList pageTitle="Top Rated" movies={movies} />
