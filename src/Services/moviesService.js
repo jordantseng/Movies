@@ -7,8 +7,8 @@ export default {
     const url = `https://api.themoviedb.org/3/movie/${category}?api_key=${apiKey}&language=en-US&page=${page}`;
     return axios.get(url).then(info => info.data);
   },
-  getSearch: query => {
-    const url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${apiKey}`;
+  getSearch: (query, page) => {
+    const url = `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${apiKey}&page=${page}`;
     return axios.get(url).then(info => info.data);
   },
   getMovieById: movieId => {

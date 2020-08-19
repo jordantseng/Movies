@@ -1,12 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import history from './history';
 
 import Header from './Components/Header/Header';
 import Routes from './Components/Routes/Routes';
 
 const App = () => {
   return (
-    <Router>
+    <Router history={history}>
       <Header />
       <Routes />
     </Router>

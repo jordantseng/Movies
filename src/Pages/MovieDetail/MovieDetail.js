@@ -3,6 +3,7 @@ import moviesService from '../../Services/moviesService';
 import { genres } from '../../Services/utilService';
 import Youtube from 'react-youtube';
 import { Container, Row, Col, Image, ListGroup, Badge } from 'react-bootstrap';
+import Loader from '../../Components/Loader/Loader';
 
 const MovieDetail = props => {
   const [movie, setMovie] = useState(null);
@@ -16,7 +17,7 @@ const MovieDetail = props => {
   }, [props.match.params.id]);
 
   if (!movie) {
-    return null;
+    return <Loader />;
   }
 
   const selectBadgeColor = genreId => {
@@ -25,7 +26,7 @@ const MovieDetail = props => {
   };
 
   const renderGeneres = (
-    <h6>
+    <h6 className="m-0">
       Generes:{' '}
       {movie.genres.map(genre => (
         <React.Fragment key={genre.id}>
@@ -35,23 +36,29 @@ const MovieDetail = props => {
     </h6>
   );
 
-  const renderTrailer = movie.videos.results['0'] && (
-    <>
-      <h6>Trailer:</h6>
-      <Youtube videoId={movie.videos.results['0'].key} />
-    </>
-  );
+  const renderTrailer = () => {
+    if (movie.videos.results['0']) {
+      return (
+        <>
+          <h6>Trailer:</h6>
+          <Youtube videoId={movie.videos.results['0'].key} />
+        </>
+      );
+    }
+    return null;
+  };
 
   return (
     <Container>
       <Row className="mt-3">
-        <Col xs={5} className="mt-4">
+        <Col md={12} lg={5} className="mt-4">
           <Image
             src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
             rounded
+            className="w-100"
           />
         </Col>
-        <Col xs={7}>
+        <Col lg={7}>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h3>{movie.title}</h3>
@@ -61,7 +68,7 @@ const MovieDetail = props => {
               <div>{movie.overview}</div>
             </ListGroup.Item>
             <ListGroup.Item className="d-flex">{renderGeneres}</ListGroup.Item>
-            <ListGroup.Item>{renderTrailer}</ListGroup.Item>
+            <ListGroup.Item>{renderTrailer()}</ListGroup.Item>
           </ListGroup>
         </Col>
       </Row>

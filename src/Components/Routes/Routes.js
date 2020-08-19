@@ -8,6 +8,7 @@ import NowPlaying from '../../Pages/NowPlaying/NowPlaying';
 import TopRated from '../../Pages/TopRated/TopRated';
 import NotFound from '../NotFound/NotFound';
 import MovieDetail from '../../Pages/MovieDetail/MovieDetail';
+import Search from '../../Pages/Search/Search';
 
 const Routes = () => {
   return (
@@ -17,6 +18,7 @@ const Routes = () => {
       <Route path="/up-coming" component={UpComing} />
       <Route path="/popular" component={Popular} />
       <Route path="/movies/:id" component={MovieDetail} />
+      <Route path="/search/:searchTerm" component={Search} />
       <Route path="/not-found" component={NotFound} />
       <Route path="/" exact component={Home} />
       <Redirect to="/not-found" />
